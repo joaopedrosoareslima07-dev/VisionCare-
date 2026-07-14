@@ -8,6 +8,10 @@ senha VARCHAR(20) NOT NULL,
 ativo boolean
 );
 
+ALTER TABLE usuarios MODIFY senha VARCHAR(255);
+
+ALTER TABLE usuarios ADD UNIQUE  (login);
+
 
 CREATE TABLE funcionarios (
 id_funcionario INT PRIMARY KEY AUTO_INCREMENT,
@@ -21,6 +25,8 @@ FOREIGN KEY (usuario_id) REFERENCES usuarios(id_usuario)
 
 );
 
+ALTER TABLE funcionarios ADD telefone_funcionario VARCHAR(20) UNIQUE NOT NULL;
+
 ALTER TABLE funcionarios  ADD UNIQUE  (cpf);
 
 CREATE TABLE medico(
@@ -30,8 +36,9 @@ crm VARCHAR(15) NOT NULL,
 especialidade VARCHAR(50),
 usuario_id INT,
 FOREIGN KEY (usuario_id) REFERENCES usuarios(id_usuario)
-
 );
+
+ALTER TABLE medico ADD telefone_medico VARCHAR(20) UNIQUE;
 
 ALTER TABLE medico ADD UNIQUE  (crm);
 
@@ -48,6 +55,8 @@ endereco VARCHAR(200),
 ativo BOOLEAN 
 );
 
+ALTER TABLE paciente ADD sexo CHAR(1);
+ALTER TABLE paciente MODIFY ativo BOOLEAN DEFAULT TRUE;
 ALTER TABLE paciente  ADD UNIQUE  (cpf);
 
 CREATE TABLE consulta(
